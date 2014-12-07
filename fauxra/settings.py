@@ -56,10 +56,15 @@ WSGI_APPLICATION = 'fauxra.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+# postgres://ykzdksycewdezq:dIugu7yz--_DLvJ3H5AGnVi4qH@ec2-23-23-210-37.compute-1.amazonaws.com:5432/d9vavjvsmht955
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9vavjvsmht955',
+        'USER': 'ykzdksycewdezq',
+        'PASSWORD': 'dIugu7yz--_DLvJ3H5AGnVi4qH',
+        'HOST': 'ec2-23-23-210-37.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -85,7 +90,7 @@ STATIC_URL = '/static/'
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
