@@ -1,7 +1,11 @@
 # fauxra
 
+Run locally with:
+```sh
+./manage.py runserver
+```
 
-Run with:
+Heroku runs with:
 ```sh
 foreman start
 ```
