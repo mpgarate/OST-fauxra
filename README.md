@@ -1,5 +1,11 @@
 # fauxra
 
+
+Run with:
+```sh
+foreman start
+```
+
 Manage dependencies with:
 
 ```sh
