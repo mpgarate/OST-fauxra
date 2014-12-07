@@ -57,16 +57,32 @@ WSGI_APPLICATION = 'fauxra.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 # postgres://ykzdksycewdezq:dIugu7yz--_DLvJ3H5AGnVi4qH@ec2-23-23-210-37.compute-1.amazonaws.com:5432/d9vavjvsmht955
+
+
+if False:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'd9vavjvsmht955',
+            'USER': 'ykzdksycewdezq',
+            'PASSWORD': 'dIugu7yz--_DLvJ3H5AGnVi4qH',
+            'HOST': 'ec2-23-23-210-37.compute-1.amazonaws.com',
+            'PORT': '5432',
+        }
+    }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd9vavjvsmht955',
-        'USER': 'ykzdksycewdezq',
-        'PASSWORD': 'dIugu7yz--_DLvJ3H5AGnVi4qH',
-        'HOST': 'ec2-23-23-210-37.compute-1.amazonaws.com',
+        'NAME': 'fauxra',
+        'USER': 'fauxra',
+        'PASSWORD': 'fhb20fFAj4CCma02n',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
