@@ -10,6 +10,11 @@ Heroku runs with:
 foreman start
 ```
 
+Run migrations on Heroku with:
+```sh
+heroku run python manage.py migrate
+```
+
 Manage dependencies with:
 
 ```sh
