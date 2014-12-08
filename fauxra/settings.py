@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'fauxra.wsgi.application'
 # postgres://ykzdksycewdezq:dIugu7yz--_DLvJ3H5AGnVi4qH@ec2-23-23-210-37.compute-1.amazonaws.com:5432/d9vavjvsmht955
 
 
-if False:
+if True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -71,18 +71,17 @@ if False:
             'PORT': '5432',
         }
     }
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fauxra',
-        'USER': 'fauxra',
-        'PASSWORD': 'fhb20fFAj4CCma02n',
-        'HOST': 'localhost',
-        'PORT': '5432',
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'fauxra',
+            'USER': 'fauxra',
+            'PASSWORD': 'fhb20fFAj4CCma02n',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
 
 
 # Internationalization
