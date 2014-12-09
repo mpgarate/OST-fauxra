@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from forums import views
+from questions import views
 
 urlpatterns = patterns('',
     # Examples:
@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'^questions/', include('forums.urls', namespace='forums')),
+    url(r'^questions/', include('questions.urls', namespace='questions')),
 )
