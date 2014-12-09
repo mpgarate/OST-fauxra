@@ -1,7 +1,10 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'create_question' }" method="post">
+<form action="{% url 'questions:create' %}" method="POST">
     {% csrf_token %}
-    <input type="text" name="question_text"></input>
+
+    <table>{{ form }}</table>
+
     <input type="submit" value="Submit" />
+
 </form>
