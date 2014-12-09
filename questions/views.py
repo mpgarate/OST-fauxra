@@ -26,3 +26,5 @@ def create_question(request):
     new_question = form.save(commit=False)
     new_question.date = datetime.datetime.now()
     new_question.save()
+    context = { 'question': new_question }
+    return render(request, 'questions/show.html', context )
