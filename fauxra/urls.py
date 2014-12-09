@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'^questions/', include('forums.urls')),
+    url(r'^questions/', include('forums.urls', namespace='forums')),
 )
