@@ -2,4 +2,14 @@
 
 {% block content %}
     <h1>{{ question }}</h1>
+    <a href="{% url 'questions:new_answer' question.id %}">Add answer</a>
+
+    <ul class="answers">
+    {% for answer in answers %}
+        <li>
+            {{ answer }}
+        </li>
+    {% endfor %}
+    </ul>
 {% endblock %}
+
