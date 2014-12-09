@@ -1,10 +1,14 @@
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% extends "base.html" %}
 
-<form action="{% url 'questions:create' %}" method="POST">
-    {% csrf_token %}
+{% block content %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <table>{{ form }}</table>
+    <form action="{% url 'questions:create' %}" method="POST">
+        {% csrf_token %}
 
-    <input type="submit" value="Submit" />
+        <table>{{ form }}</table>
 
-</form>
+        <input type="submit" value="Submit" />
+
+    </form>
+{% endblock %}
