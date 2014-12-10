@@ -11,4 +11,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
     url(r'^questions/', include('questions.urls', namespace='questions')),
+    # url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
 )

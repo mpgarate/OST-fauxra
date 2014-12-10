@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.http import Http404
 
 from questions.models import Question
 from questions.forms import QuestionForm, AnswerForm
@@ -17,14 +18,18 @@ def show_question(request, question_id):
     return render(request, 'questions/show.html', context)
 
 def new_question(request):
-    form = QuestionForm()
-    context =  { 'form': form }
-    return render(request, 'questions/new.html', context)
+    if request.user.is_authenticated():
+        form = QuestionForm()
+        context =  { 'form': form }
+        return render(request, 'questions/new.html', context)
+    else:
+        return redirect('accounts:login')
 
 def create_question(request):
     form = QuestionForm(request.POST)
     new_question = form.save(commit=False)
     new_question.date = datetime.datetime.now()
+    new_question.user = request.user
     new_question.save()
     context = { 'question': new_question }
     return render(request, 'questions/show.html', context)
@@ -40,5 +45,6 @@ def create_answer(request, question_id):
     new_answer.date = datetime.datetime.now()
     question = get_object_or_404(Question, pk=question_id)
     new_answer.question = question
+    new_answer.user = request.user
     new_answer.save()
     return redirect('questions:show', question_id)

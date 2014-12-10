@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <table>{{ form }}</table>
+
+        <input type="submit" value="Submit" />
+
+    </form>
+
+    <a href="{% url 'accounts:register' %}">Register</a>
+{% endblock %}
