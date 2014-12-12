@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if latest_questions %}
+    {% if questions %}
         <ul>
-            {% for question in latest_questions %}
+            {% for question in questions %}
             <li><a href="{% url 'questions:show' question.id %}"> {{ question.text }}</a></li>
             {% endfor %}
         </ul>

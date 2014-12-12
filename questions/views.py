@@ -4,11 +4,19 @@ from django.http import Http404
 from questions.models import Question, Answer, QuestionVote, AnswerVote
 from questions.forms import QuestionForm, AnswerForm
 
+from taggit.models import Tag
+
 import datetime
 
 def index(request):
-    latest_questions = Question.objects.order_by('-date')[:10]
-    context = { 'latest_questions': latest_questions }
+    questions = Question.objects.order_by('-date')[:10]
+    context = { 'questions': questions }
+    return render(request, 'questions/index.html', context)
+
+def tagged(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    questions = Question.objects.filter(tags=tag)
+    context = { 'questions': questions }
     return render(request, 'questions/index.html', context)
 
 def show_question(request, question_id):

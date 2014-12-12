@@ -9,7 +9,10 @@
     <h1>{{ question }}</h1>
     Votes: {{ question.votes }}
 
-    Tags: {{ question.tags.all }}
+    Tags:
+    {% for tag in question.tags.all %}
+        <a href="{% url 'questions:tagged' tag.slug %}">{{ tag }}</a>
+    {% endfor %}
 
 
     <br>
