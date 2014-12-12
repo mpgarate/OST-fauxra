@@ -15,9 +15,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Answer',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('text', models.CharField(max_length=1000)),
-                ('date', models.DateTimeField(verbose_name=b'date published')),
+                ('date', models.DateTimeField(verbose_name='date published')),
             ],
             options={
             },
@@ -26,9 +26,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Question',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('text', models.CharField(max_length=1000)),
-                ('date', models.DateTimeField(verbose_name=b'date published')),
+                ('date', models.DateTimeField(verbose_name='date published')),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
