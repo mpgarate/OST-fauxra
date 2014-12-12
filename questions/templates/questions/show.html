@@ -4,6 +4,11 @@
     <h1>{{ question }}</h1>
     <a href="{% url 'questions:new_answer' question.id %}">Add answer</a>
 
+    Votes: {{ question.votes}}
+
+    <a href="{% url 'questions:vote_up' question.id %}">Vote up</a> | 
+    <a href="{% url 'questions:vote_down' question.id %}">Vote down</a>
+
     <ul class="answers">
     {% for answer in answers %}
         <li>

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404
 
-from questions.models import Question
+from questions.models import Question, Answer, QuestionVote
 from questions.forms import QuestionForm, AnswerForm
 
 import datetime
@@ -51,3 +51,30 @@ def create_answer(request, question_id):
     new_answer.user = request.user
     new_answer.save()
     return redirect('questions:show', question_id)
+
+def vote_up(request, question_id):
+    return vote_foo_question(request, question_id, 1)
+
+def vote_down(request, question_id):
+    return vote_foo_question(request, question_id, -1)
+
+def vote_foo_question(request, question_id, value):
+    if not request.user.is_authenticated():
+        return redirect('questions:show', question_id)
+
+    user_id = request.user.id
+    question = get_object_or_404(Question, pk=question_id)
+    vote = QuestionVote.objects.filter(user_id=user_id, question=question).first()
+
+    if vote is None:
+        vote = QuestionVote()
+        vote.user_id = user_id
+        vote.question = question
+
+    vote.value = value
+    vote.save()
+    question.update_votes()
+    question.save()
+
+    return redirect('questions:show', question_id)
+

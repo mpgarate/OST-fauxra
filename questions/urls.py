@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^(?P<question_id>\d+)/answers/new/$', views.new_answer, name='new_answer'),
     url(r'^(?P<question_id>\d+)/answers/create/$', views.create_answer,
         name='create_answer'),
+    url(r'^vote_up/(?P<question_id>\d+)/$', views.vote_up, name='vote_up'),
+    url(r'^vote_down/(?P<question_id>\d+)/$', views.vote_down, name='vote_down'),
 )
 
 
