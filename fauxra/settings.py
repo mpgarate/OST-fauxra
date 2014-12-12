@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'questions',
     'accounts',
+    'taggit',
 )
 
 MIDDLEWARE_CLASSES = (

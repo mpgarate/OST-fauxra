@@ -2,11 +2,15 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from taggit.managers import TaggableManager
+
 class Question(models.Model):
-    text = models.CharField(max_length=1000)
+    text = models.TextField()
     date = models.DateTimeField('date published')
+    date_updated = models.DateTimeField('date updated', null=True)
     user = models.ForeignKey(User)
-    votes = models.IntegerField()
+    votes = models.IntegerField(default=0)
+    tags = TaggableManager()
 
     def update_votes(self):
         question_votes = QuestionVote.objects.filter(question=self)
@@ -22,10 +26,10 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question)
-    text = models.CharField(max_length=1000)
+    text = models.TextField()
     date = models.DateTimeField('date published')
     user = models.ForeignKey(User)
-    votes = models.IntegerField()
+    votes = models.IntegerField(default=0)
 
     def update_votes(self):
         answer_votes = AnswerVote.objects.filter(answer=self)

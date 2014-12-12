@@ -26,13 +26,50 @@ def new_question(request):
         return redirect('accounts:sign_in')
 
 def create_question(request):
+    if request.user.is_authenticated():
+        form = QuestionForm(request.POST)
+        new_question = form.save(commit=False)
+        new_question.date = datetime.datetime.now()
+        new_question.user = request.user
+        new_question.save()
+
+        return redirect('questions:show', new_question)
+    else:
+        return redirect('/')
+
+def update_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+
+    if not request.user == question.user:
+        return redirect('questions:show', question)
+
     form = QuestionForm(request.POST)
-    new_question = form.save(commit=False)
-    new_question.date = datetime.datetime.now()
-    new_question.user = request.user
-    new_question.save()
-    context = { 'question': new_question }
-    return render(request, 'questions/show.html', context)
+
+    if form.is_valid():
+        tags = form.cleaned_data['tags']
+
+        question.tags.clear()
+
+        for tag in tags:
+            question.tags.add(tag)
+
+        question.date_updated = datetime.datetime.now()
+        question.save()
+
+        return redirect('questions:show', question_id=question_id)
+    else:
+        return redirect('questions:edit', question_id=question_id)
+
+
+def edit_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+
+    if not request.user == question.user:
+        return redirect('questions:show', question)
+
+    form = QuestionForm(instance=question)
+    context = { 'form': form, 'question': question }
+    return render(request, 'questions/edit.html', context)
 
 def new_answer(request, question_id):
     if request.user.is_authenticated():

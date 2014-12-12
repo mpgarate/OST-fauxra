@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+    {% if user == question.user %}
+        <a href="{% url 'questions:edit' question.id %}">Edit</a>
+    {% endif %}
     <h1>{{ question }}</h1>
-    Votes: {{ question.votes}}
+    Votes: {{ question.votes }}
+
+    Tags: {{ question.tags.all }}
+
 
     <br>
 
