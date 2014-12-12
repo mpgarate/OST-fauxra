@@ -1,13 +1,35 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+
+def sign_out(request):
+    logout(request)
+    return redirect('/')
+
+def sign_in(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            return redirect('accounts:sign_in')
+        else:
+            return redirect('/')
+    else:
+        form = AuthenticationForm()
+        context = {'form': form}
+        return render(request, 'accounts/sign_in.html', context)
 
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            print(request.POST)
+            form.save()
             username = request.POST['username']
             password = request.POST['password1']
 

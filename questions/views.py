@@ -23,7 +23,7 @@ def new_question(request):
         context =  { 'form': form }
         return render(request, 'questions/new.html', context)
     else:
-        return redirect('accounts:login')
+        return redirect('accounts:sign_in')
 
 def create_question(request):
     form = QuestionForm(request.POST)
@@ -35,9 +35,12 @@ def create_question(request):
     return render(request, 'questions/show.html', context)
 
 def new_answer(request, question_id):
-    form = AnswerForm()
-    context = { 'form': form , 'question_id': question_id }
-    return render(request, 'questions/answers/new.html', context)
+    if request.user.is_authenticated():
+        form = AnswerForm()
+        context = { 'form': form , 'question_id': question_id }
+        return render(request, 'questions/answers/new.html', context)
+    else:
+        return redirect('accounts:sign_in')
 
 def create_answer(request, question_id):
     form = AnswerForm(request.POST)
