@@ -27,7 +27,19 @@ def index(request):
 
 def tagged(request, tag_slug):
     tag = get_object_or_404(Tag, slug=tag_slug)
-    questions = Question.objects.filter(tags=tag)
+    questions_list = Question.objects.filter(tags=tag)
+
+    paginator = Paginator(questions_list, 10)
+
+    page = request.GET.get('page')
+
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
+
     context = { 'questions': questions }
     return render(request, 'questions/index.html', context)
 
