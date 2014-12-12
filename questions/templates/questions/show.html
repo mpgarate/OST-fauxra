@@ -26,9 +26,8 @@
 
     <table class="answers">
     {% for answer in answers %}
-        <tr>
-            {% include 'answers/_answer.html' with answer=answer %}
-        </tr>
+        <hr>
+        {% include 'answers/_answer.html' with answer=answer %}
     {% endfor %}
     </table>
 {% endblock %}

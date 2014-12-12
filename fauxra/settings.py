@@ -37,8 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'questions',
+    'images',
     'accounts',
     'taggit',
+    'cloudinary',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,7 +56,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'fauxra.urls'
 
 WSGI_APPLICATION = 'fauxra.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

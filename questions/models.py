@@ -1,3 +1,4 @@
+import re
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -41,7 +42,17 @@ class Answer(models.Model):
         self.votes = vote_count
 
     def __str__(self):
-        return self.text
+        text = self.text
+
+        # wrap image urls with img tag
+        # text = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s"\'"])',
+         #             r'<img src="\1" />', text)
+
+        # wrap non-image urls with anchor tag
+        # text = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s]([\s]|$)((?!\.jpg)))',
+         #      r'<a href="\1">\1</a>', text)
+
+        return text
 
 class QuestionVote(models.Model):
     user = models.ForeignKey(User)

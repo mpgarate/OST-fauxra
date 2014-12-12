@@ -1,11 +1,20 @@
-<td>
-    {{ answer }}
-</td>
+{% load filters %}
 
-<td>
-    {{ answer.votes }}
-</td>
-<td>
-    <a href="{% url 'questions:vote_up_answer' answer.id %}">Vote up</a> | 
-    <a href="{% url 'questions:vote_down_answer' answer.id %}">Vote down</a>
-</td>
+<table>
+    <tr>
+        <td>
+            {{ answer.votes }}
+        </td>
+        <td>
+            <a href="{% url 'questions:vote_up_answer' answer.id %}">Vote up</a> | 
+            <a href="{% url 'questions:vote_down_answer' answer.id %}">Vote down</a>
+        </td>
+    </tr>
+</table>
+
+<p>
+    {% autoescape off %}
+    {{ answer|replace_urls }}
+    {% endautoescape %}
+</p>
+

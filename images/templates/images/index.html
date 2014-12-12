@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load cloudinary %}
+
+{% block content %}
+    {% if images %}
+        <ul>
+            {% for image in images %}
+                <li><a href="{% url 'images:show' image.id %}">{{image.id}}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No images are available. </p>
+    {% endif %}
+
+    <a href="{% url 'images:new' %}">Create image</a>
+
+{% endblock %}
