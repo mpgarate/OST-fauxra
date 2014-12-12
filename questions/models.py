@@ -10,7 +10,7 @@ class Question(models.Model):
     date_updated = models.DateTimeField('date updated', null=True)
     user = models.ForeignKey(User)
     votes = models.IntegerField(default=0)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     def update_votes(self):
         question_votes = QuestionVote.objects.filter(question=self)

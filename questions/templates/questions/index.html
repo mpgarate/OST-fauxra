@@ -7,6 +7,19 @@
             <li><a href="{% url 'questions:show' question.id %}"> {{ question.text }}</a></li>
             {% endfor %}
         </ul>
+
+        <div class="pagination">
+            {% if questions.has_previous %}
+                <a href="?page={{ questions.previous_page_number }}">previous</a>
+            {% endif %}
+
+            Page {{ questions.number }} of {{ questions.paginator.num_pages }}
+
+            {% if questions.has_next%}
+                <a href="?page={{ questions.next_page_number }}">next</a>
+            {% endif %}
+
+        </div>
     {% else %}
         <p>No questions are available. </p>
     {% endif %}

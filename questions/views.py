@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from questions.models import Question, Answer, QuestionVote, AnswerVote
 from questions.forms import QuestionForm, AnswerForm
@@ -9,7 +10,18 @@ from taggit.models import Tag
 import datetime
 
 def index(request):
-    questions = Question.objects.order_by('-date')[:10]
+    questions_list = Question.objects.order_by('-date')
+    paginator = Paginator(questions_list, 10)
+
+    page = request.GET.get('page')
+
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
+
     context = { 'questions': questions }
     return render(request, 'questions/index.html', context)
 
@@ -36,12 +48,17 @@ def new_question(request):
 def create_question(request):
     if request.user.is_authenticated():
         form = QuestionForm(request.POST)
-        new_question = form.save(commit=False)
-        new_question.date = datetime.datetime.now()
-        new_question.user = request.user
-        new_question.save()
 
-        return redirect('questions:show', new_question)
+        if form.is_valid():
+            new_question = form.save(commit=False)
+            new_question.date = datetime.datetime.now()
+            new_question.user = request.user
+            new_question.save()
+            return redirect('questions:show', question_id = new_question.id)
+        else:
+            print("ERRORS:")
+            print(form.errors)
+            return redirect('questions:new')
     else:
         return redirect('/')
 
