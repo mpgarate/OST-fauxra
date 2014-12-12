@@ -8,11 +8,10 @@ def sign_out(request):
 
 def sign_in(request):
     if request.method == "POST":
-        form = AuthenticationForm(request)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            username = request.POST['username']
-            password = request.POST['password1']
+            username = request.POST.get('username')
+            password = request.POST.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
