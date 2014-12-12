@@ -13,11 +13,14 @@ def replace_urls(value):
 
 
     # wrap all urls with anchor tag
-    value = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s]([\s]|$)((?!\.jpg)))',
+
+    print("VALUE")
+    print(value)
+    value = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s])',
                    r'<a href="\1" target="_blank">\1</a>', value)
 
     # wrap image urls with img tag
-    value = re.sub(r'>(http[s]{0,1}://[\w]*\.[\w\/\.]*\.jpg)<',
+    value = re.sub(r'>(http[s]{0,1}://[\w]*\.[\w\/\.]*\.((jpg)|(png)|(gif)))<',
                    r'><img src="\1" /><', value)
 
     return value
