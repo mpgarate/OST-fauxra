@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404
 
-from questions.models import Question, Answer, QuestionVote
+from questions.models import Question, Answer, QuestionVote, AnswerVote
 from questions.forms import QuestionForm, AnswerForm
 
 import datetime
@@ -13,7 +13,7 @@ def index(request):
 
 def show_question(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    answers = question.answer_set.all()
+    answers = question.answer_set.order_by('votes').reverse()
     context = { 'question': question, 'answers': answers }
     return render(request, 'questions/show.html', context)
 
@@ -78,3 +78,29 @@ def vote_foo_question(request, question_id, value):
 
     return redirect('questions:show', question_id)
 
+def vote_up_answer(request, answer_id):
+    return vote_foo_answer(request, answer_id, 1)
+def vote_down_answer(request, answer_id):
+    return vote_foo_answer(request, answer_id, -1)
+
+def vote_foo_answer(request, answer_id, value):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    question_id = answer.question_id
+
+    if not request.user.is_authenticated():
+        return redirect('questions:show', question_id)
+
+    user_id = request.user.id
+    vote = AnswerVote.objects.filter(user_id=user_id, answer=answer).first()
+
+    if vote is None:
+        vote = AnswerVote()
+        vote.user_id = user_id
+        vote.answer = answer
+
+    vote.value = value
+    vote.save()
+    answer.update_votes()
+    answer.save()
+
+    return redirect('questions:show', question_id)

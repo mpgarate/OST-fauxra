@@ -25,6 +25,16 @@ class Answer(models.Model):
     text = models.CharField(max_length=1000)
     date = models.DateTimeField('date published')
     user = models.ForeignKey(User)
+    votes = models.IntegerField()
+
+    def update_votes(self):
+        answer_votes = AnswerVote.objects.filter(answer=self)
+        vote_count = 0
+
+        for vote in answer_votes:
+            vote_count += vote.value
+
+        self.votes = vote_count
 
     def __str__(self):
         return self.text

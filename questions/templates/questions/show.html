@@ -2,19 +2,23 @@
 
 {% block content %}
     <h1>{{ question }}</h1>
-    <a href="{% url 'questions:new_answer' question.id %}">Add answer</a>
-
     Votes: {{ question.votes}}
+
+    <br>
 
     <a href="{% url 'questions:vote_up' question.id %}">Vote up</a> | 
     <a href="{% url 'questions:vote_down' question.id %}">Vote down</a>
 
-    <ul class="answers">
+    <br>
+
+    <a href="{% url 'questions:new_answer' question.id %}">Add answer</a>
+
+    <table class="answers">
     {% for answer in answers %}
-        <li>
-            {{ answer }}
-        </li>
+        <tr>
+            {% include 'answers/_answer.html' with answer=answer %}
+        </tr>
     {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
 

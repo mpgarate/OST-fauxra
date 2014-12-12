@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'fauxra.wsgi.application'
 # postgres://ykzdksycewdezq:dIugu7yz--_DLvJ3H5AGnVi4qH@ec2-23-23-210-37.compute-1.amazonaws.com:5432/d9vavjvsmht955
 
 
-if True:
+if False:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
