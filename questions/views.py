@@ -47,6 +47,8 @@ def show_question(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     answers = question.answer_set.order_by('votes').reverse()
     context = { 'question': question, 'answers': answers }
+    print("TAGS")
+    question.tags
     return render(request, 'questions/show.html', context)
 
 def new_question(request):
@@ -66,6 +68,13 @@ def create_question(request):
             new_question.date = datetime.datetime.now()
             new_question.user = request.user
             new_question.save()
+
+            tags = form.cleaned_data['tags']
+            new_question.tags.clear()
+            for tag in tags:
+                new_question.tags.add(tag)
+
+            new_question.save()
             return redirect('questions:show', question_id = new_question.id)
         else:
             print("ERRORS:")
@@ -84,9 +93,7 @@ def update_question(request, question_id):
 
     if form.is_valid():
         tags = form.cleaned_data['tags']
-
         question.tags.clear()
-
         for tag in tags:
             question.tags.add(tag)
 

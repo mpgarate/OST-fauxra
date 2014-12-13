@@ -21,7 +21,7 @@
         Votes: {{ question.votes }}
     </p>
 
-    {% if question.tags.length > 0 %}
+    {% if question.tags.count > 0 %}
 
         Tags:
         {% for tag in question.tags.all %}
