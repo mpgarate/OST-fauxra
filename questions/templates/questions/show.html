@@ -1,18 +1,36 @@
 {% extends "base.html" %}
 
+{% load filters %}
+
 {% block content %}
 
 
     {% if user == question.user %}
         <a href="{% url 'questions:edit' question.id %}">Edit</a>
     {% endif %}
-    <h1>{{ question }}</h1>
-    Votes: {{ question.votes }}
 
-    Tags:
-    {% for tag in question.tags.all %}
-        <a href="{% url 'questions:tagged' tag.slug %}">{{ tag }}</a>
-    {% endfor %}
+    {% autoescape off %}
+    <p>{{ question | replace_urls }}</p>
+    {% endautoescape %}
+
+    <p>
+        Asked by {{ question.user.username }}
+    </p>
+
+    <p>
+        Votes: {{ question.votes }}
+    </p>
+
+    {% if question.tags.length > 0 %}
+
+        Tags:
+        {% for tag in question.tags.all %}
+            <a href="{% url 'questions:tagged' tag.slug %}">{{ tag }}</a>
+        {% endfor %}
+
+    {% else %}
+        No tags. 
+    {% endif %}
 
 
     <br>
