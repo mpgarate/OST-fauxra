@@ -4,7 +4,7 @@
     {% if questions %}
         <ul>
             {% for question in questions %}
-            <li><a href="{% url 'questions:show' question.id %}"> {{ question.text }}</a></li>
+            <li><a href="{% url 'questions:show' question.id %}"> {{ question.text|truncatechars:500 }}</a></li>
             {% endfor %}
         </ul>
 
