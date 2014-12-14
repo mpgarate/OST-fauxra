@@ -7,21 +7,23 @@
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            <a href="{% url 'questions:vote_up' question.id %}">
-                <button type="button" class="btn btn-xs btn-default">
-                    <span class="glyphicon glyphicon-chevron-up">
-                    </span>
-                </button>
-            </a>
-            <a href="{% url 'questions:vote_down' question.id %}">
-                <button type="button" class="btn btn-xs btn-default">
-                    <span class="glyphicon glyphicon-chevron-down">
-                    </span>
-                </button>
-            </a>
-            <span class="badge">
-                Points: {{ question.votes }}
-            </span>
+            <div class="vote-links">
+                <a href="{% url 'questions:vote_up' question.id %}">
+                    <button type="button" class="btn btn-xs btn-default">
+                        <span class="glyphicon glyphicon-chevron-up">
+                        </span>
+                    </button>
+                </a>
+                <a href="{% url 'questions:vote_down' question.id %}">
+                    <button type="button" class="btn btn-xs btn-default">
+                        <span class="glyphicon glyphicon-chevron-down">
+                        </span>
+                    </button>
+                </a>
+                <span class="badge">
+                    Points: {{ question.votes }}
+                </span>
+            </div>
 
             ::
 

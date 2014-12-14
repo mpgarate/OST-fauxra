@@ -5,3 +5,7 @@ body {
 .question-well{
     margin-bottom: 0;
 }
+
+.vote-links a {
+    text-decoration: none;
+}

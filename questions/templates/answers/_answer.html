@@ -2,21 +2,23 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="{% url 'questions:vote_up_answer' answer.id %}">
-            <button type="button" class="btn btn-xs btn-default">
-                <span class="glyphicon glyphicon-chevron-up">
-                </span>
-            </button>
+        <div class="vote-links">
+            <a href="{% url 'questions:vote_up_answer' answer.id %}">
+                <button type="button" class="btn btn-xs btn-default">
+                    <span class="glyphicon glyphicon-chevron-up">
+                    </span>
+                </button>
+            </a>
+            <a href="{% url 'questions:vote_down_answer' answer.id %}">
+                <button type="button" class="btn btn-xs btn-default">
+                    <span class="glyphicon glyphicon-chevron-down">
+                    </span>
+                </button>
+            </a>
+            <span class="badge">
+                Points: {{ answer.votes }}
+            </span>
         </a>
-        <a href="{% url 'questions:vote_down_answer' answer.id %}">
-            <button type="button" class="btn btn-xs btn-default">
-                <span class="glyphicon glyphicon-chevron-down">
-                </span>
-            </button>
-        </a>
-        <span class="badge">
-            Points: {{ answer.votes }}
-        </span>
 
         ::
 
@@ -24,7 +26,7 @@
         {% if user == answer.user %}
             <span class="edit-link pull-right">
                 <a href="{% url 'questions:edit_answer' answer.id %}">
-                    Edit question</a>
+                    Edit answer</a>
             </span>
         {% endif %}
     </div>
