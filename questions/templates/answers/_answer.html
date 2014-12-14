@@ -2,7 +2,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="vote-links">
+        <span class="vote-links">
             <a href="{% url 'questions:vote_up_answer' answer.id %}">
                 <button type="button" class="btn btn-xs btn-default">
                     <span class="glyphicon glyphicon-chevron-up">
@@ -18,7 +18,7 @@
             <span class="badge">
                 Points: {{ answer.votes }}
             </span>
-        </a>
+        </span>
 
         ::
 
@@ -36,6 +36,15 @@
             {{ answer|replace_urls }}
             {% endautoescape %}
         </p>
+
+        {% if answer.date_updated %}
+        <p>
+            <hr>
+            <span class="pull-right">
+                <em>Edited: {{ answer.date_updated }}</em>
+            </span>
+        </p>
+        {% endif %}
     </div>
 </div>
 

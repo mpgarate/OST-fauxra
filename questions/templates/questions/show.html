@@ -7,7 +7,7 @@
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            <div class="vote-links">
+            <span class="vote-links">
                 <a href="{% url 'questions:vote_up' question.id %}">
                     <button type="button" class="btn btn-xs btn-default">
                         <span class="glyphicon glyphicon-chevron-up">
@@ -23,7 +23,7 @@
                 <span class="badge">
                     Points: {{ question.votes }}
                 </span>
-            </div>
+            </span>
 
             ::
 
@@ -43,24 +43,28 @@
                     {{ question | replace_urls }}
                 </p>
             {% endautoescape %}
-        </div>
 
-        <div class="well well-sm question-well">
-                {% if question.tags.count > 0 %}
-                    <span class="tags pull-right">
-                        Tagged:
-                        {% for tag in question.tags.all %}
-                            <a href="{% url 'questions:tagged' tag.slug %}" 
-                                class="btn btn-xs btn-primary">
-                                {{ tag }}
-                            </a>
-                        {% endfor %}
-                    </span>
-                {% endif %}
+            <hr>
 
-                <span class="updated-time">
-                    Edited: {{ question.date_updated }}
+            <p>
+                <span class="tags">
+                    {% if question.tags.count > 0 %}
+                            Tagged:
+                            {% for tag in question.tags.all %}
+                                <a href="{% url 'questions:tagged' tag.slug %}" 
+                                    class="btn btn-xs btn-primary">
+                                    {{ tag }}
+                                </a>
+                            {% endfor %}
+                    {% else %}
+                        No tags.
+                    {% endif %}
                 </span>
+
+                <span class="updated-time pull-right">
+                    <em>Edited: {{ question.date_updated }}</em>
+                </span>
+            </p>
         </div>
     </div>
 

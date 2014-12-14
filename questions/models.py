@@ -34,6 +34,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     text = models.TextField()
     date = models.DateTimeField('date published')
+    date_updated = models.DateTimeField('date updated', null=True)
     user = models.ForeignKey(User)
     votes = models.IntegerField(default=0)
 

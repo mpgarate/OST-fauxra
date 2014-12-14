@@ -9,3 +9,7 @@ body {
 .vote-links a {
     text-decoration: none;
 }
+
+.panel p:last-child{
+    margin-bottom:0;
+}
