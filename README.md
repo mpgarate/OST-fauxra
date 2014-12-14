@@ -1,5 +1,9 @@
 # fauxra
 
+Questions on the home page are sorted by recent activity, determined by 
+whenever a question is updated. This occurs when created, edited, answered,
+or voted on, as well as when one of its answers is edited or voted on. 
+
 Run locally with:
 ```sh
 ./manage.py runserver
