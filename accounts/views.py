@@ -16,13 +16,11 @@ def sign_in(request):
             if user is not None:
                 login(request, user)
                 return redirect('/')
-            return redirect('accounts:sign_in')
-        else:
-            return redirect('/')
     else:
         form = AuthenticationForm()
-        context = {'form': form}
-        return render(request, 'accounts/sign_in.html', context)
+
+    context = {'form': form}
+    return render(request, 'accounts/sign_in.html', context)
 
 def register(request):
     if request.method == "POST":
