@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="row">
+    <div class="col col-sm-8">
+        <h1>Latest Questions</h1>
+    </div>
+    <div class="col col-sm-4">
+        <br>
+        <a href="{% url 'questions:new' %}" class="btn btn-success">Create question</a>
+    </div>
+</div>
+
+
     {% if questions %}
         <ul>
             {% for question in questions %}
@@ -23,9 +35,5 @@
     {% else %}
         <p>No questions are available. </p>
     {% endif %}
-
-    <a href="{% url 'questions:new' %}">Create question</a>
-    <a href="{% url 'images:new' %}">Create image</a>
-    <a href="{% url 'images:index' %}">View all images</a>
 
 {% endblock %}
