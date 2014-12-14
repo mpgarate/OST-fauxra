@@ -4,13 +4,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from questions.models import Question, Answer, QuestionVote, AnswerVote
 from questions.forms import QuestionForm, AnswerForm
+from django.db.models import Count
 
 from taggit.models import Tag
 
 import datetime
 
 def index(request):
-    questions_list = Question.objects.order_by('-date')
+    questions_list = Question.objects.annotate(
+        null_last_activity_date=Count('last_activity_date')
+    ).order_by('-null_last_activity_date', '-last_activity_date')
     paginator = Paginator(questions_list, 10)
 
     page = request.GET.get('page')

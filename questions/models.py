@@ -10,6 +10,8 @@ from django.contrib.syndication.views import Feed
 
 from django.template.defaultfilters import truncatechars
 
+import datetime
+
 class Question(models.Model):
     text = models.TextField()
     date = models.DateTimeField('date published')
@@ -17,6 +19,11 @@ class Question(models.Model):
     user = models.ForeignKey(User)
     votes = models.IntegerField(default=0)
     tags = TaggableManager(blank=True)
+    last_activity_date = models.DateTimeField('last activity date', null=True)
+
+    def save(self, *args, **kwargs):
+        self.last_activity_date = datetime.datetime.now()
+        super(Question, self).save(*args, **kwargs)
 
     def update_votes(self):
         question_votes = QuestionVote.objects.filter(question=self)
@@ -46,6 +53,11 @@ class Answer(models.Model):
             vote_count += vote.value
 
         self.votes = vote_count
+
+    def save(self, *args, **kwargs):
+        self.question.last_activity_date = datetime.datetime.now()
+        self.question.save()
+        super(Answer, self).save(*args, **kwargs)
 
     def __str__(self):
         text = self.text
