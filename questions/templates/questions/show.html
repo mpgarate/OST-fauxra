@@ -5,40 +5,57 @@
 {% block content %}
 
 
-    {% if user == question.user %}
-        <a href="{% url 'questions:edit' question.id %}">Edit</a>
-    {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="{% url 'questions:vote_up' question.id %}">
+                <button type="button" class="btn btn-sm btn-default">
+                    <span class="glyphicon glyphicon-chevron-up">
+                    </span>
+                </button>
+            </a>
+            <a href="{% url 'questions:vote_down' question.id %}">
+                <button type="button" class="btn btn-sm btn-default">
+                    <span class="glyphicon glyphicon-chevron-down">
+                    </span>
+                </button>
+            </a>
+            <span class="badge">
+                Points: {{ question.votes }}
+            </span>
 
-    {% autoescape off %}
-    <p>{{ question | replace_urls }}</p>
-    {% endautoescape %}
+            ::
 
-    <p>
-        Asked by {{ question.user.username }}
-    </p>
-
-    <p>
-        Votes: {{ question.votes }}
-    </p>
-
-    {% if question.tags.count > 0 %}
-
-        Tags:
-        {% for tag in question.tags.all %}
-            <a href="{% url 'questions:tagged' tag.slug %}">{{ tag }}</a>
-        {% endfor %}
-
-    {% else %}
-        No tags. 
-    {% endif %}
+            <em>Asked by </em><strong>{{ question.user.username }}</strong>
 
 
-    <br>
+            {% if user == question.user %}
+                <span class="edit-link pull-right">
+                    <a href="{% url 'questions:edit' question.id %}">Edit question</a>
+                </span>
+            {% endif %}
 
-    <a href="{% url 'questions:vote_up' question.id %}">Vote up</a> | 
-    <a href="{% url 'questions:vote_down' question.id %}">Vote down</a>
+        </div>
 
-    <br>
+        <div class="panel-body">
+            {% autoescape off %}
+                <p>
+                    {{ question | replace_urls }}
+                </p>
+            {% endautoescape %}
+
+            {% if question.tags.count > 0 %}
+                <span class="tags pull-right">
+                    Tagged:
+                    {% for tag in question.tags.all %}
+                        <a href="{% url 'questions:tagged' tag.slug %}" 
+                            class="btn btn-xs btn-primary">
+                            {{ tag }}
+                        </a>
+                    {% endfor %}
+                </span>
+            {% endif %}
+        </div>
+    </div>
 
     <a href="{% url 'questions:new_answer' question.id %}">Add answer</a>
 

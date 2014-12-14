@@ -1,16 +1,8 @@
 {% load filters %}
 
-<table>
-    <tr>
-        <td>
-            {{ answer.votes }}
-        </td>
-        <td>
-            <a href="{% url 'questions:vote_up_answer' answer.id %}">Vote up</a> | 
-            <a href="{% url 'questions:vote_down_answer' answer.id %}">Vote down</a>
-        </td>
-    </tr>
-</table>
+[{{ answer.votes }}] 
+<a href="{% url 'questions:vote_up_answer' answer.id %}">Vote up</a> | 
+<a href="{% url 'questions:vote_down_answer' answer.id %}">Vote down</a>
 
 <p>
     {% autoescape off %}
