@@ -3,11 +3,7 @@
 
 {% block content %}
 
-{% autoescape off %}
-<a href="{{ image_url }}" target="_blank">
-{% endautoescape %}
-    {% cloudinary image.image width=200 %}
-</a>
+{% cloudinary image.image width=500 crop="limit" %}
 
 {% endblock %}
 
