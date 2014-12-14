@@ -5,7 +5,7 @@
 {% block content %}
 
 
-    <div class="panel panel-primary">
+    <div class="panel panel-info">
         <div class="panel-heading">
             <a href="{% url 'questions:vote_up' question.id %}">
                 <button type="button" class="btn btn-xs btn-default">
@@ -27,7 +27,6 @@
 
             <em>Asked by </em><strong>{{ question.user.username }}</strong>
 
-
             {% if user == question.user %}
                 <span class="edit-link pull-right">
                     <a href="{% url 'questions:edit' question.id %}">Edit question</a>
@@ -42,18 +41,24 @@
                     {{ question | replace_urls }}
                 </p>
             {% endautoescape %}
+        </div>
 
-            {% if question.tags.count > 0 %}
-                <span class="tags pull-right">
-                    Tagged:
-                    {% for tag in question.tags.all %}
-                        <a href="{% url 'questions:tagged' tag.slug %}" 
-                            class="btn btn-xs btn-primary">
-                            {{ tag }}
-                        </a>
-                    {% endfor %}
+        <div class="well well-sm question-well">
+                {% if question.tags.count > 0 %}
+                    <span class="tags pull-right">
+                        Tagged:
+                        {% for tag in question.tags.all %}
+                            <a href="{% url 'questions:tagged' tag.slug %}" 
+                                class="btn btn-xs btn-primary">
+                                {{ tag }}
+                            </a>
+                        {% endfor %}
+                    </span>
+                {% endif %}
+
+                <span class="updated-time">
+                    Edited: {{ question.date_updated }}
                 </span>
-            {% endif %}
         </div>
     </div>
 
