@@ -21,6 +21,12 @@
         ::
 
         <em>Asked by </em><strong>{{ answer.user.username }}</strong>
+        {% if user == answer.user %}
+            <span class="edit-link pull-right">
+                <a href="{% url 'questions:edit_answer' answer.id %}">
+                    Edit question</a>
+            </span>
+        {% endif %}
     </div>
     <div class="panel-body">
         <p>
