@@ -13,7 +13,7 @@ def index(request):
 
 def show(request, image_id):
     image = get_object_or_404(Image, pk=image_id)
-    image_url = cloudinary.utils.cloudinary_url(image.image)[0]
+    image_url = cloudinary.utils.cloudinary_url(str(image.image))[0]
     context = { 'image': image, 'image_url': image_url}
     return render(request, 'images/show.html', context)
 
