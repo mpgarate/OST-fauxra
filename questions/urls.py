@@ -30,7 +30,8 @@ urlpatterns = patterns('',
         name='vote_down_answer'),
 
     # rss
-    url(r'^feed/$', feeds.LatestQuestionsFeed()),
-    url(r'^(?P<question_id>\d+)/answers/feed/$', feeds.LatestAnswersFeed()),
+    url(r'^feed/$', feeds.LatestQuestionsFeed(), name="feed"),
+    url(r'^(?P<question_id>\d+)/answers/feed/$', feeds.LatestAnswersFeed(),
+        name="answers_feed"),
 )
 
