@@ -69,11 +69,29 @@ class AnswerVote(models.Model):
     answer = models.ForeignKey(Answer)
     value = models.IntegerField()
 
+class LatestAnswersFeed(Feed):
+    link = "/"
+
+    def get_object(self, request, question_id):
+        return get_object_or_404(Question, pk=question_id)
+
+    def items(self, question):
+        return Answer.objects.filter(question=question).order_by('-date')[:10]
+
+    def title(self, item):
+        return "Latest answers on Fauxra for the question: %s" % item.question.text
+
+    def item_title(self, item):
+        return item.text
+
+    def item_link(self, item):
+        return reverse("questions:show", args=[item.question.id])
+
 
 class LatestQuestionsFeed(Feed):
     title = "Latest questions from Fauxra"
     link = "/"
-    description = "See the latest questions posted to fauxra."
+    description = "See the latest questions posted to Fauxra."
 
     def items(self):
         return Question.objects.order_by('-date')[:10]

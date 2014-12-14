@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, url
 
-from questions import views
-
-from questions.models import LatestQuestionsFeed
+from questions import views, feeds
 
 urlpatterns = patterns('',
     # questions
@@ -28,6 +26,7 @@ urlpatterns = patterns('',
         name='vote_down_answer'),
 
     # rss
-    url(r'^feed/$', LatestQuestionsFeed()),
+    url(r'^feed/$', feeds.LatestQuestionsFeed()),
+    url(r'^(?P<question_id>\d+)/answers/feed/$', feeds.LatestAnswersFeed()),
 )
 
