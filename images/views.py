@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect
 
 from images.models import Image
 from images.forms import ImageForm
+
 import cloudinary
 
 def index(request):
@@ -12,8 +13,8 @@ def index(request):
 
 def show(request, image_id):
     image = get_object_or_404(Image, pk=image_id)
-    full_image_url = cloudinary.utils.cloudinary_url(image.image)[0]
-    context = { 'image': image, 'full_image_url': full_image_url }
+    image_url = cloudinary.utils.cloudinary_url(image.image)[0]
+    context = { 'image': image, 'image_url': image_url}
     return render(request, 'images/show.html', context)
 
 def new(request):
