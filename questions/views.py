@@ -40,8 +40,8 @@ def tagged(request, tag_slug):
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
 
-    context = { 'questions': questions }
-    return render(request, 'questions/index.html', context)
+    context = { 'questions': questions, 'tag': tag }
+    return render(request, 'questions/tagged.html', context)
 
 def show_question(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

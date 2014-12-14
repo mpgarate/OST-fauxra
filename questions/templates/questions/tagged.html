@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col col-sm-8">
+        <h1>Questions tagged "{{ tag }}"</h1>
+    </div>
+    <div class="col col-sm-4">
+        <br>
+        <a href="{% url 'questions:new' %}" class="btn btn-success">Create question</a>
+    </div>
+</div>
+
+
+    {% if questions %}
+        <ul>
+            {% for question in questions %}
+            <li><a href="{% url 'questions:show' question.id %}"> {{ question.text|truncatechars:500 }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <nav class="pagination">
+            Page {{ questions.number }} of {{ questions.paginator.num_pages }}
+            <ul class="pager">
+                {% if questions.has_previous %}
+                    <li><a href="?page={{ questions.previous_page_number }}">previous</a></li>
+                {% endif %}
+
+
+                {% if questions.has_next%}
+                    <li><a href="?page={{ questions.next_page_number }}">next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <p>No questions are available. </p>
+    {% endif %}
+
+{% endblock %}
