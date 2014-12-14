@@ -3,7 +3,11 @@
 
 {% block content %}
 
-{% cloudinary image.image %}
+{% autoescape off %}
+<a href="{{ full_image_url }}" target="_blank">
+{% endautoescape %}
+    {% cloudinary image.image width=200 %}
+</a>
 
 {% endblock %}
 

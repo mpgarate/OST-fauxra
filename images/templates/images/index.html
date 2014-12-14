@@ -16,7 +16,9 @@
     {% if images %}
         <ul>
             {% for image in images %}
-                <li><a href="{% url 'images:show' image.id %}">{{image.id}}</a></li>
+                <li><a href="{% url 'images:show' image.id %}">{{image.id}}
+                {% cloudinary image.image width=100 %} 
+                </a></li>
             {% endfor %}
         </ul>
     {% else %}
