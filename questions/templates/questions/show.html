@@ -8,6 +8,9 @@
     <div class="panel panel-info">
         <div class="panel-heading">
             <span class="vote-links">
+                <span class="badge">
+                    {{ question.votes }}
+                </span>
                 <a href="{% url 'questions:vote_up' question.id %}">
                     <button type="button" class="btn btn-xs btn-default">
                         <span class="glyphicon glyphicon-chevron-up">
@@ -20,14 +23,15 @@
                         </span>
                     </button>
                 </a>
-                <span class="badge">
-                    Points: {{ question.votes }}
-                </span>
             </span>
 
             ::
 
             <em>Asked by </em><strong>{{ question.user.username }}</strong>
+
+            <em>on</em>
+
+            {{ question.date }}
 
             {% if user == question.user %}
                 <span class="edit-link pull-right">
