@@ -26,9 +26,6 @@ def create(request):
         form.save()
         return redirect('images:index')
 
-    print("INVALID FORM")
-    print(form.errors)
-
     return redirect('images:new')
 
 

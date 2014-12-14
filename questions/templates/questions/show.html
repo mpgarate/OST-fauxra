@@ -5,16 +5,16 @@
 {% block content %}
 
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <a href="{% url 'questions:vote_up' question.id %}">
-                <button type="button" class="btn btn-sm btn-default">
+                <button type="button" class="btn btn-xs btn-default">
                     <span class="glyphicon glyphicon-chevron-up">
                     </span>
                 </button>
             </a>
             <a href="{% url 'questions:vote_down' question.id %}">
-                <button type="button" class="btn btn-sm btn-default">
+                <button type="button" class="btn btn-xs btn-default">
                     <span class="glyphicon glyphicon-chevron-down">
                     </span>
                 </button>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <a href="{% url 'questions:new_answer' question.id %}">Add answer</a>
+    <a href="{% url 'questions:new_answer' question.id %}" class="btn btn-success">Add answer</a>
 
     <table class="answers">
     {% for answer in answers %}

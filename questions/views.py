@@ -47,7 +47,6 @@ def show_question(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     answers = question.answer_set.order_by('votes').reverse()
     context = { 'question': question, 'answers': answers }
-    print("TAGS")
     question.tags
     return render(request, 'questions/show.html', context)
 
@@ -77,8 +76,6 @@ def create_question(request):
             new_question.save()
             return redirect('questions:show', question_id = new_question.id)
         else:
-            print("ERRORS:")
-            print(form.errors)
             return redirect('questions:new')
     else:
         return redirect('/')

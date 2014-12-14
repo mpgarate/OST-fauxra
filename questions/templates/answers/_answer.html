@@ -1,12 +1,34 @@
 {% load filters %}
 
-[{{ answer.votes }}] 
-<a href="{% url 'questions:vote_up_answer' answer.id %}">Vote up</a> | 
-<a href="{% url 'questions:vote_down_answer' answer.id %}">Vote down</a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="{% url 'questions:vote_up_answer' answer.id %}">
+            <button type="button" class="btn btn-xs btn-default">
+                <span class="glyphicon glyphicon-chevron-up">
+                </span>
+            </button>
+        </a>
+        <a href="{% url 'questions:vote_down_answer' answer.id %}">
+            <button type="button" class="btn btn-xs btn-default">
+                <span class="glyphicon glyphicon-chevron-down">
+                </span>
+            </button>
+        </a>
+        <span class="badge">
+            Points: {{ answer.votes }}
+        </span>
 
-<p>
-    {% autoescape off %}
-    {{ answer|replace_urls }}
-    {% endautoescape %}
-</p>
+        ::
+
+        <em>Asked by </em><strong>{{ answer.user.username }}</strong>
+    </div>
+    <div class="panel-body">
+        <p>
+            {% autoescape off %}
+            {{ answer|replace_urls }}
+            {% endautoescape %}
+        </p>
+    </div>
+</div>
+
 
