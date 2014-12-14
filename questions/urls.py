@@ -2,6 +2,8 @@ from django.conf.urls import patterns, url
 
 from questions import views
 
+from questions.models import LatestQuestionsFeed
+
 urlpatterns = patterns('',
     # questions
     url(r'^$', views.index, name='index'),
@@ -24,6 +26,8 @@ urlpatterns = patterns('',
         name='vote_up_answer'),
     url(r'^vote_down_answer/(?P<answer_id>\d+)/$', views.vote_down_answer,
         name='vote_down_answer'),
-)
 
+    # rss
+    url(r'^feed/$', LatestQuestionsFeed()),
+)
 

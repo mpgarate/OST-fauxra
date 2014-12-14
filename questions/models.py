@@ -1,9 +1,14 @@
-import re
 from django.db import models
+
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
 
 from taggit.managers import TaggableManager
+
+from django.contrib.syndication.views import Feed
+
+from django.template.defaultfilters import truncatechars
 
 class Question(models.Model):
     text = models.TextField()
@@ -63,3 +68,19 @@ class AnswerVote(models.Model):
     user = models.ForeignKey(User)
     answer = models.ForeignKey(Answer)
     value = models.IntegerField()
+
+
+class LatestQuestionsFeed(Feed):
+    title = "Latest questions from Fauxra"
+    link = "/"
+    description = "See the latest questions posted to fauxra."
+
+    def items(self):
+        return Question.objects.order_by('-date')[:10]
+
+    def item_title(self, item):
+        return truncatechars(item.text, 500)
+
+    def item_link(self, item):
+        return reverse("questions:show", args=[item.id])
+
