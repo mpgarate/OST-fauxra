@@ -21,7 +21,7 @@ def replace_urls(value):
     # to avoid double-wrapping urls, this regex takes advantage of the fact that
     # any image urls of interest will be surrounded by the > and < characters of
     # the surrounding anchor tag.
-    value = re.sub(r'>(http[s]{0,1}://[\w]*\.[\w\/\.]*\.((jpg)|(png)|(gif)))<',
+    value = re.sub(r'>(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s]*\.((jpg)|(png)|(gif)))<',
                    r'><img src="\1" alt="embedded image" /><', value)
 
     return value
