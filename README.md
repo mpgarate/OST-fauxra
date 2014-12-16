@@ -99,8 +99,6 @@ Also, the database configuration is done by environment variables using the form
 export DATABASE_URL=postgres://fauxra:password@localhost/fauxra
 
 
-
-
 ## How to run locally
 Set up a virtualenv with the following command:
 
