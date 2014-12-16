@@ -74,6 +74,11 @@
 
     <a href="{% url 'questions:new_answer' question.id %}" class="btn btn-success">Add answer</a>
 
+    <a href='{% url "questions:answers_feed" question.id  %}' class="btn btn-default">
+          <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+          Answers RSS Feed
+    </a>
+
     <table class="answers">
     {% for answer in answers %}
         <hr>
