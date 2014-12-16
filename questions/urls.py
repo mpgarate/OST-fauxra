@@ -29,9 +29,5 @@ urlpatterns = patterns('',
     url(r'^vote_down_answer/(?P<answer_id>\d+)/$', views.vote_down_answer,
         name='vote_down_answer'),
 
-    # rss
-    url(r'^feed/$', feeds.LatestQuestionsFeed(), name="feed"),
-    url(r'^(?P<question_id>\d+)/answers/feed/$', feeds.LatestAnswersFeed(),
-        name="answers_feed"),
 )
 
