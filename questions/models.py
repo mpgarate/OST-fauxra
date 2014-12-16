@@ -57,14 +57,6 @@ class Answer(models.Model):
     def __str__(self):
         text = self.text
 
-        # wrap image urls with img tag
-        # text = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s"\'"])',
-         #             r'<img src="\1" />', text)
-
-        # wrap non-image urls with anchor tag
-        # text = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s]([\s]|$)((?!\.jpg)))',
-         #      r'<a href="\1">\1</a>', text)
-
         return text
 
 class QuestionVote(models.Model):

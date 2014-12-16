@@ -119,9 +119,6 @@ def update_answer(request, answer_id):
         answer.save()
 
         return redirect('questions:show', answer.question.id)
-    else:
-        print("INVALID FORM")
-        print(form.errors)
 
     context = { 'form': form }
     return render(request, 'questions:edit_answer', context)

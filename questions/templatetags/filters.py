@@ -7,11 +7,6 @@ register = template.Library()
 @register.filter
 @stringfilter
 def replace_urls(value):
-    # wrap image urls with img tag
-    # value = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s"\'"])',
-    #                r'<img src="\1" />', value)
-
-
     # wrap all urls with anchor tag
 
     value = re.sub(r'(http[s]{0,1}://[\w]*\.[\w\/\.]*[^\s]*)',
