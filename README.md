@@ -50,7 +50,7 @@ Answer edit date - in the lower right corner of the answer (only appears if edit
 references to recent questions. When viewing a question, there is also a link
 to the Answers RSS feed. 
 
-11. I created a git branch named remove_css which has the tag “experiment”
+11. I created a git branch named remove_rss which has the tag “experiment”
 
 ## How this project is designed
 
