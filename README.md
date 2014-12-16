@@ -55,8 +55,9 @@ to the Answers RSS feed.
 ## How this project is designed
 
 This project uses the django framework with a postgres database, the heroku 
-cloudinary service for image handling, as well as the following python 
-packages:
+cloudinary service for image handling and taggit for tag management.
+Also, I used Bootstrap to help with styling the website. 
+I used the following python packages:
 
 dj-database-url==0.3.0
 dj-static==0.0.6
@@ -93,6 +94,9 @@ images: support uploading and displaying images
   urls.py - image url definitions
   templates/ - template files
 
+
+Also, the database configuration is done by environment variables using the format:
+export DATABASE_URL=postgres://fauxra:password@localhost/fauxra
 
 
 
